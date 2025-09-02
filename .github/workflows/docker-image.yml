@@ -39,5 +39,5 @@ jobs:
       - name: Deploy Lambda Function (Container)
         uses: aws-actions/aws-lambda-deploy@v1
         with:
-          function-name: my-ction     # Change to your function name
+          function-name: imagesearch     # Change to your function name
           image-uri: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}   # Points to your newly built image
