@@ -28,8 +28,8 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t public.ecr.aws/myalias/completely/new:$IMAGE_TAG .
-          docker push public.ecr.aws/myalias/completely/new:$IMAGE_TAG
+          docker build -t public.ecr.aws/t3n4v7x5/completely/new:$IMAGE_TAG .
+          docker push public.ecr.aws/t3n4v7x5/completely/new:$IMAGE_TAG
 
       # Deploy to Lambda using the container image from ECR
       - name: Deploy Lambda Function (Container)
