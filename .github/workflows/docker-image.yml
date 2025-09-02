@@ -37,7 +37,6 @@ jobs:
 
       # Deploy to Lambda using the container image from ECR
       - name: Deploy Lambda Function (Container)
-        uses: aws-actions/aws-lambda-deploy@v1
         run: |
           aws lambda update-function-code \
             --function-name imagesearch \
