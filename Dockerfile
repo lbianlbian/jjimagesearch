@@ -1,10 +1,5 @@
 FROM public.ecr.aws/lambda/python:3.12
 
-RUN dnf -y update && dnf -y install gcc zlib-devel libjpeg-devel 
-
-# Copy your function code
-COPY . .
-# Install pip dependencies
 RUN dnf -y update && dnf -y install \
     gcc \
     zlib-devel \
@@ -12,7 +7,13 @@ RUN dnf -y update && dnf -y install \
     rust \
     cargo \
     openssl-devel \
-    pkgconfig
+    pkgconfig \
+    gcc-c++
+
+# Copy your function code
+COPY . .
+# Install pip dependencies
+
 
 RUN pip3 install --upgrade pip
 
