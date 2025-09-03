@@ -1,6 +1,6 @@
 FROM public.ecr.aws/lambda/python:3.12
 
-dnf -y update && dnf -y install \
+RUN dnf -y update && dnf -y install \
     python3 python3-pip python3-devel gcc zlib-devel libjpeg-devel curl unzip
 
 # Copy your function code
