@@ -2,7 +2,7 @@ FROM public.ecr.aws/lambda/python:3.12
 
 COPY . .
 
-RUN apk add build-base zlib-dev jpeg-dev
+RUN yum install -y zlib-devel libjpeg-devel gcc
 
 RUN pip install -r requirements.txt
 
