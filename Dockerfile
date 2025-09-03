@@ -5,8 +5,17 @@ RUN dnf -y update && dnf -y install gcc zlib-devel libjpeg-devel
 # Copy your function code
 COPY . .
 # Install pip dependencies
+RUN dnf -y update && dnf -y install \
+    gcc \
+    zlib-devel \
+    libjpeg-devel \
+    rust \
+    cargo \
+    openssl-devel \
+    pkgconfig
+
 RUN pip3 install --upgrade pip
-RUN dnf install -y rust cargo
+
 RUN pip3 install -r requirements.txt
 
 # Set CMD to your function handler
