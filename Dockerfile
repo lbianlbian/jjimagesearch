@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install AWS Lambda Runtime Interface Client (RIC)
 RUN curl -Lo /usr/local/bin/aws-lambda-rie \
-    https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie && \
+    https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie-linux-amd64 && \
     chmod +x /usr/local/bin/aws-lambda-rie
 
 # Download the Lambda Runtime Interface Client for Lambda to invoke your handler
