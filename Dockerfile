@@ -17,8 +17,7 @@ RUN curl -Lo /lambda-rie \
 ENV PATH="/usr/local/bin:${PATH}"
 
 # Copy your function code
-COPY . ${LAMBDA_TASK_ROOT:-/var/task}
-
+COPY . .
 # Install pip dependencies
 RUN pip3 install -r requirements.txt
 
