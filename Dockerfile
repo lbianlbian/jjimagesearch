@@ -13,11 +13,9 @@ RUN dnf -y update && dnf -y install \
 # Copy your function code
 COPY . .
 # Install pip dependencies
+RUN pip install --upgrade pip
 
-
-RUN pip3 install --upgrade pip
-
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Set CMD to your function handler
 CMD ["lambda_function.lambda_handler"]
