@@ -16,8 +16,8 @@ AUTH_HEADER = {
 DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works
 
 #add cache_dir to avoid permissions issue when using aws lambda, also set env_var TRANSFORMERS_CACHE or HF_HOME to /tmp
-model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32", cache_dir="/tmp/")
-processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32", cache_dir="/tmp/")
+model = CLIPModel.from_pretrained("openai/clip-vit-base-patch16", cache_dir="/tmp/")
+processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch16", cache_dir="/tmp/")
 
 
 def lambda_handler(event, context):
