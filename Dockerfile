@@ -5,6 +5,7 @@ COPY requirements.txt ${LAMBDA_TASK_ROOT}
 ENV HF_HOME=/tmp/
 # Install the specified packages
 RUN pip install -r requirements.txt
+RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
 
 # Copy function code
 COPY lambda_function.py ${LAMBDA_TASK_ROOT}
