@@ -1,6 +1,4 @@
-requests==2.31.0
-Pillow==9.1.0
-transformers>=4.34.0
-
---find-links https://download.pytorch.org/whl/cpu
-torch>=2.4.0
+transformers
+torch
+pillow
+requests
