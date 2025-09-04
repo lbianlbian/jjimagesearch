@@ -15,8 +15,12 @@ AUTH_HEADER = {
 }
 DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works
 
-processor = AutoProcessor.from_pretrained("openai/clip-vit-base-patch32")
-model = AutoModelForZeroShotImageClassification.from_pretrained("openai/clip-vit-base-patch32")
+# Load processor from disk
+processor_local = AutoProcessor.from_pretrained("./clip-vit")
+
+# Load model from disk
+model_local = AutoModelForZeroShotImageClassification.from_pretrained("./clip-vit")
+
 
 def lambda_handler(event, context):
     '''
