@@ -1,5 +1,5 @@
 from PIL import Image
-from transformers import AutoProcessor, AutoModelForZeroShotImageClassification
+from transformers import CLIPProcessor, CLIPModel
 import math
 import requests
 import json
@@ -15,11 +15,9 @@ AUTH_HEADER = {
 }
 DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works
 
-# Load processor from disk
-processor_local = AutoProcessor.from_pretrained("./clip-vit")
-
-# Load model from disk
-model_local = AutoModelForZeroShotImageClassification.from_pretrained("./clip-vit")
+#add cache_dir to avoid permissions issue when using aws lambda, also set env_var TRANSFORMERS_CACHE or HF_HOME to /tmp
+model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32", cache_dir="/tmp/")
+processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32", cache_dir="/tmp/")
 
 
 def lambda_handler(event, context):
