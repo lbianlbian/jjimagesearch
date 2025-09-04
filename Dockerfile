@@ -8,9 +8,8 @@ COPY requirements.txt ${LAMBDA_TASK_ROOT}
 
 # Install the specified packages
 RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
-RUN pip install git+https://github.com/Lednik7/CLIP-ONNX.git
+RUN pip install ftfy regex tqdm
 RUN pip install git+https://github.com/openai/CLIP.git
-RUN pip install onnxruntime-gpu
 RUN pip install -r requirements.txt
 
 # Copy function code
