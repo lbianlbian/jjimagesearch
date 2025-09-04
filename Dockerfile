@@ -1,5 +1,8 @@
 FROM public.ecr.aws/lambda/python:3.12
 
+RUN dnf update
+RUN dnf install git -y
+
 # Copy requirements.txt
 COPY requirements.txt ${LAMBDA_TASK_ROOT}
 
