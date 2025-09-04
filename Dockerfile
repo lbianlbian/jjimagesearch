@@ -2,13 +2,13 @@ FROM public.ecr.aws/lambda/python:3.12
 
 # Copy requirements.txt
 COPY requirements.txt ${LAMBDA_TASK_ROOT}
-ENV HF_HOME=/tmp/
-# Install the specified packages
-RUN pip install -r requirements.txt
-RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
 
-COPY download_models.py ${LAMBDA_TASK_ROOT}
-RUN python download_models.py
+# Install the specified packages
+RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
+RUN pip install git+https://github.com/Lednik7/CLIP-ONNX.git
+RUN pip install git+https://github.com/openai/CLIP.git
+RUN pip install onnxruntime-gpu
+RUN pip install -r requirements.txt
 
 # Copy function code
 COPY lambda_function.py ${LAMBDA_TASK_ROOT}
