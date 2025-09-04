@@ -5,6 +5,9 @@ import requests
 import json
 import base64
 from io import BytesIO
+import os
+
+print(os.listdir("."))
 
 NEW_IMGS = 3  # NUMBER OF IMAGES TO DIVIDE THE ORIGINAL INTO FOR RECTANGLE CROPPING
 MIN_CROP = 2  # MINIMUM TO SPLIT EACH DIMENSION BY IN SQUARE CROPPING, MUST BE 2
