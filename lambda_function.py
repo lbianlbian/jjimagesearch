@@ -1,9 +1,12 @@
 import os
-
-print(os.listdir("."))
+from datetime import datetime
+print(datetime.now(), os.listdir("."))
 
 from PIL import Image
+print(datetime.now(), "imported pillow")
 from transformers import CLIPProcessor, CLIPModel
+print(datetime.now(), "imported transformers")
+
 import math
 import requests
 import json
