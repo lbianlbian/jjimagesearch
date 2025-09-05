@@ -10,6 +10,7 @@ COPY requirements.txt ${LAMBDA_TASK_ROOT}
 RUN pip install clip_cpp huggingface_hub
 RUN pip install -r requirements.txt
 RUN huggingface-cli download mys/ggml_clip-vit-base-patch32 clip-vit-base-patch32_ggml-model-f16.gguf
+RUN cp /root/.cache/huggingface/hub/models--mys--ggml_clip-vit-base-patch32/snapshots/*/clip-vit-base-patch32_ggml-model-f16.gguf ${LAMBDA_TASK_ROOT}/
 
 # Copy function code
 COPY lambda_function.py ${LAMBDA_TASK_ROOT}
