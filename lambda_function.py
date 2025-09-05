@@ -1,11 +1,5 @@
-import os
-from datetime import datetime
-print(datetime.now(), os.listdir("."))
-
+import clip
 from PIL import Image
-print(datetime.now(), "imported pillow")
-from transformers import CLIPProcessor, CLIPModel
-print(datetime.now(), "imported transformers")
 
 import math
 import requests
@@ -22,10 +16,7 @@ AUTH_HEADER = {
 }
 DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works
 
-#add cache_dir to avoid permissions issue when using aws lambda, also set env_var TRANSFORMERS_CACHE or HF_HOME to /tmp
-model = CLIPModel.from_pretrained("clip-vit", local_files_only=True)
-processor = CLIPProcessor.from_pretrained("clip-vit", local_files_only=True)
-
+model, preprocess = clip.load("ViT-B/32", device="cpu")
 
 def lambda_handler(event, context):
     '''
