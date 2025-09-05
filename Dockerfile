@@ -7,12 +7,10 @@ RUN dnf install git -y
 COPY requirements.txt ${LAMBDA_TASK_ROOT}
 
 # Install the specified packages
-RUN pip install clip_cpp
+RUN pip install clip_cpp huggingface_hub
 RUN pip install -r requirements.txt
+RUN huggingface-cli download mys/ggml_clip-vit-base-patch32 clip-vit-base-patch32_ggml-model-f16.gguf
 
-# download model first
-COPY download_models.py ${LAMBDA_TASK_ROOT}
-RUN python download_models.py
 # Copy function code
 COPY lambda_function.py ${LAMBDA_TASK_ROOT}
 
