@@ -1,4 +1,7 @@
+from datetime import datetime
+print("start of file", datetime.now())
 import clip
+print("imported clip", datetime.now())
 from PIL import Image
 
 import math
@@ -15,8 +18,9 @@ AUTH_HEADER = {
     "Authorization": "Bearer ABsIMHB1cmUtb3N0cmljaC0yMDM2MS1nY3AtdXNjMXJlYWRvbmx5TWpWbFpqUmtORGt0T0RWa01TMDBZMlZpTFRsalptWXRORE0xTVRSbFlURTNaalE1"
 }
 DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works
-
+print("starting clip load", datetime.now())
 model, preprocess = clip.load("~/.cache/clip", device="cpu")
+print("clip is loaded:", datetime.now())
 
 def lambda_handler(event, context):
     '''
