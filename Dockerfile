@@ -7,9 +7,7 @@ RUN dnf install git -y
 COPY requirements.txt ${LAMBDA_TASK_ROOT}
 
 # Install the specified packages
-RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-RUN pip install ftfy regex tqdm
-RUN pip install git+https://github.com/openai/CLIP.git
+RUN pip install clip_cpp
 RUN pip install -r requirements.txt
 
 # download model first
