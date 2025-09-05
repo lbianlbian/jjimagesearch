@@ -1,6 +1,6 @@
 from datetime import datetime
 print("start of file", datetime.now())
-import clip
+from clip_cpp import Clip
 print("imported clip", datetime.now())
 from PIL import Image
 
@@ -17,9 +17,15 @@ URL = "https://pure-ostrich-20361-gcp-usc1-vector.upstash.io/query"
 AUTH_HEADER = {
     "Authorization": "Bearer ABsIMHB1cmUtb3N0cmljaC0yMDM2MS1nY3AtdXNjMXJlYWRvbmx5TWpWbFpqUmtORGt0T0RWa01TMDBZMlZpTFRsalptWXRORE0xTVRSbFlURTNaalE1"
 }
-DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works
+DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works\
+repo_id = 'mys/ggml_CLIP-ViT-B-32-laion2B-s34B-b79K'
+model_file = 'CLIP-ViT-B-32-laion2B-s34B-b79K_ggml-model-f16.gguf'
 print("starting clip load", datetime.now())
-model, preprocess = clip.load("~/.cache/clip", device="cpu")
+model = Clip(
+    model_path_or_repo_id=repo_id,
+    model_file=model_file,
+    verbosity=2
+)
 print("clip is loaded:", datetime.now())
 
 def lambda_handler(event, context):
