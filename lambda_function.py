@@ -16,7 +16,7 @@ AUTH_HEADER = {
 }
 DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works
 
-model, preprocess = clip.load("ViT-B/32", device="cpu")
+model, preprocess = clip.load("~/.cache/clip", device="cpu")
 
 def lambda_handler(event, context):
     '''
