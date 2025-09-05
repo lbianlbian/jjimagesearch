@@ -1,7 +1,5 @@
 from datetime import datetime
-print("start of file", datetime.now())
 from clip_cpp import Clip
-print("imported clip", datetime.now())
 from PIL import Image
 
 import math
@@ -19,10 +17,11 @@ AUTH_HEADER = {
 }
 DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works\
 
+import os
+print(os.listdir("."))
 print("starting clip load", datetime.now())
 model = Clip(
     model_path_or_repo_id="clip-vit-base-patch32_ggml-model-f16.gguf",
-    model_file="clip-vit-base-patch32_ggml-model-f16.gguf",
     verbosity=2
 )
 print("clip is loaded:", datetime.now())
