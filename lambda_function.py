@@ -18,12 +18,11 @@ AUTH_HEADER = {
     "Authorization": "Bearer ABsIMHB1cmUtb3N0cmljaC0yMDM2MS1nY3AtdXNjMXJlYWRvbmx5TWpWbFpqUmtORGt0T0RWa01TMDBZMlZpTFRsalptWXRORE0xTVRSbFlURTNaalE1"
 }
 DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothing else works\
-repo_id = 'mys/ggml_CLIP-ViT-B-32-laion2B-s34B-b79K'
-model_file = 'CLIP-ViT-B-32-laion2B-s34B-b79K_ggml-model-f16.gguf'
+
 print("starting clip load", datetime.now())
 model = Clip(
-    model_path_or_repo_id=repo_id,
-    model_file=model_file,
+    model_path_or_repo_id="clip-vit-base-patch32_ggml-model-f16.gguf",
+    model_file="clip-vit-base-patch32_ggml-model-f16.gguf",
     verbosity=2
 )
 print("clip is loaded:", datetime.now())
