@@ -21,7 +21,7 @@ import os
 print(os.listdir("."))
 print("starting clip load", datetime.now())
 model = Clip(
-    model_path_or_repo_id="clip-vit-base-patch32_ggml-model-f16.gguf",
+    model_path_or_repo_id="CLIP-ViT-B-32-laion2B-s34B-b79K_ggml-model-f16.gguf",
     verbosity=2
 )
 print("clip is loaded:", datetime.now())
