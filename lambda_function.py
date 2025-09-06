@@ -2,6 +2,7 @@ from clip_cpp import Clip
 import requests
 import json
 import base64
+import os
 
 URL = "https://pure-ostrich-20361-gcp-usc1-vector.upstash.io/query"
 AUTH_HEADER = {
@@ -26,6 +27,8 @@ def lambda_handler(event, context):
     with open(PIC_DOWNLOAD_PATH, "wb") as image_file:
         image_file.write(base64.b64decode(b64_str))
     
+    print(os.path.getsize(PIC_DOWNLOAD_PATH))
+
     vector = model.load_preprocess_encode_image(PIC_DOWNLOAD_PATH)
     curr_payload = {
         "vector": vector,
