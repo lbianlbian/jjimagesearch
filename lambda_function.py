@@ -29,7 +29,7 @@ def lambda_handler(event, context):
     # get image
     request_payload = json.loads(event['body'])
     b64_str = request_payload["image"]
-    with open("tmp/image0.jpg", "wb") as image_file:
+    with open("/tmp/image0.jpg", "wb") as image_file:
         image_file.write(base64.b64decode(b64_str))
     img_b64dec = base64.b64decode(b64_str)
     img_byteIO = BytesIO(img_b64dec)
@@ -43,14 +43,14 @@ def lambda_handler(event, context):
         for i in range(NEW_IMGS):
             left, right = width // NEW_IMGS * i, width // NEW_IMGS * (i + 1)
             crop = image.crop((left, 0, right, height))  # crop goes (left, upper, right, lower)
-            crop.save(f"tmp/image{i + 1}.jpg")
+            crop.save(f"/tmp/image{i + 1}.jpg")
 
     elif height / 2 >= width:
         # crop by 3rds along height dimension
         for i in range(NEW_IMGS):
             upper, lower = height // NEW_IMGS * i, height // NEW_IMGS * (i + 1)
             crop = image.crop((0, upper, width, lower))  # crop goes (left, upper, right, lower)
-            crop.save(f"tmp/image{i + 1}.jpg")
+            crop.save(f"/tmp/image{i + 1}.jpg")
     else:
         # crop into 4ths and then 9ths
         img_count = 1
@@ -60,14 +60,14 @@ def lambda_handler(event, context):
                     left, right = width // split * i, width // split * (i + 1)
                     upper, lower = height // split * j, height // split * (j + 1)
                     crop = image.crop((left, upper, right, lower))
-                    crop.save(f"tmp/image{img_count}.jpg")
+                    crop.save(f"/tmp/image{img_count}.jpg")
                     img_count += 1
     
     best_score = -1 * math.inf
     best_matches = DEFAULT
     i = 0
     while i <= (MAX_CROP + 1)**2:  # upper bound on number of images present
-        curr_img_file = f"tmp/image{i}.jpg"
+        curr_img_file = f"/tmp/image{i}.jpg"
         if not os.path.isfile(curr_img_file):
             break
         vector = model.load_preprocess_encode_image(curr_img_file)
