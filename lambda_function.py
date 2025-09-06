@@ -2,7 +2,6 @@ from clip_cpp import Clip
 import requests
 import json
 import base64
-import os
 
 URL = "https://pure-ostrich-20361-gcp-usc1-vector.upstash.io/query"
 AUTH_HEADER = {
@@ -12,7 +11,7 @@ DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothin
 PIC_DOWNLOAD_PATH = "/tmp/image.jpg"
 
 model = Clip(
-    model_path_or_repo_id="CLIP-ViT-B-32-laion2B-s34B-b79K_ggml-model-f16.gguf",
+    model_path_or_repo_id="CLIP-ViT-B-32-laion2B-s34B-b79K_ggml-model-q4_0.gguf",
     verbosity=2
 )
 
@@ -27,8 +26,6 @@ def lambda_handler(event, context):
     with open(PIC_DOWNLOAD_PATH, "wb") as image_file:
         image_file.write(base64.b64decode(b64_str))
     
-    print(os.path.getsize(PIC_DOWNLOAD_PATH))
-
     vector = model.load_preprocess_encode_image(PIC_DOWNLOAD_PATH)
     curr_payload = {
         "vector": vector,
@@ -59,4 +56,7 @@ def lambda_handler(event, context):
     '''
     results = resp.json()["result"]
     
-    return json.dumps([match["id"] for match in results])
+    return {
+        "statusCode": 200,
+        "body": json.dumps([match["id"] for match in results])
+    }
