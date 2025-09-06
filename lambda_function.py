@@ -12,7 +12,7 @@ DEFAULT = ["LJ-6187-YQN", "FD-9853-UTP", "BX-8172-MKE"]  # return this if nothin
 PIC_DOWNLOAD_PATH = "/tmp/image.jpg"
 
 model = Clip(
-    model_path_or_repo_id="CLIP-ViT-B-32-laion2B-s34B-b79K_ggml-text-model-q4_0.gguf",
+    model_path_or_repo_id="CLIP-ViT-B-32-laion2B-s34B-b79K_ggml-model-f16.gguf",
     verbosity=2
 )
 
