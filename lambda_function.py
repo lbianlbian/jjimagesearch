@@ -27,6 +27,8 @@ def lambda_handler(event, context):
         image_file.write(base64.b64decode(b64_str))
     
     vector = model.load_preprocess_encode_image(PIC_DOWNLOAD_PATH)
+    print(len(vector))
+    print(vector)
     curr_payload = {
         "vector": vector,
         "includeMetadata": True,
