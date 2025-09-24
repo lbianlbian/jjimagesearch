@@ -18,45 +18,46 @@ model = Clip(
 def lambda_handler(event, context):
     '''
     image file will be base64 encoded in post body  with key image
-    images will be stored in tmp dir as tmp/image{0 through IDK}.jpg with 0 being the original noncropped image
     '''
-    # get image
-    request_payload = json.loads(event['body'])
-    b64_str = request_payload["image"]
-    with open(PIC_DOWNLOAD_PATH, "wb") as image_file:
-        image_file.write(base64.b64decode(b64_str))
+    results = DEFAULT
+    try:
+        # get image
+        request_payload = json.loads(event['body'])
+        b64_str = request_payload["image"]
+        with open(PIC_DOWNLOAD_PATH, "wb") as image_file:
+            image_file.write(base64.b64decode(b64_str))
+        
+        vector = model.load_preprocess_encode_image(PIC_DOWNLOAD_PATH)
+        curr_payload = {
+            "vector": vector,
+            "includeMetadata": True,
+            "topK": 3
+        }
+        resp = requests.post(URL, json=curr_payload, headers=AUTH_HEADER)
+        '''
+        {
+            "result": [
+                {
+                    "id": "id-0",
+                    "score": 1.0,
+                    "metadata": {
+                        "link": "upstash.com"
+                    }
+                },
+                {
+                    "id": "id-1",
+                    "score": 0.99996454,
+                    "metadata": {
+                        "link": "docs.upstash.com"
+                    }
+                }
+            ]
+        }
     
-    vector = model.load_preprocess_encode_image(PIC_DOWNLOAD_PATH)
-    print(len(vector))
-    print(vector)
-    curr_payload = {
-        "vector": vector,
-        "includeMetadata": True,
-        "topK": 3
-    }
-    resp = requests.post(URL, json=curr_payload, headers=AUTH_HEADER)
-    '''
-    {
-        "result": [
-            {
-                "id": "id-0",
-                "score": 1.0,
-                "metadata": {
-                    "link": "upstash.com"
-                }
-            },
-            {
-                "id": "id-1",
-                "score": 0.99996454,
-                "metadata": {
-                    "link": "docs.upstash.com"
-                }
-            }
-        ]
-    }
-
-    '''
-    results = resp.json()["result"]
+        '''
+        results = resp.json()["result"]
+    except Exception as e:
+        print("error happened and default was returned", e)
     
     return {
         "statusCode": 200,
